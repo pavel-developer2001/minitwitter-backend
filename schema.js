@@ -5,15 +5,16 @@ export const schema = buildSchema(`
         id : ID
         name: String
         email: String  
-        password: Int
+        password: String  
+        password2: String 
     }
 
     input UserRegisterInput {
         id : ID
         name: String
         email: String  
-        password: Int
-        password2: Int
+        password: String  
+        password2: String  
     }
     input UserLoginInput {
         email: String

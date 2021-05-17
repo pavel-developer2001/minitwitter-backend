@@ -17,14 +17,26 @@ export const root = {
 		const newUser = new User({
 			name: name,
 			email: email,
-			password: hashPassword,
+			password: hashPassword.toString(),
 		});
 		await newUser.save();
 		const token = generateJwt(newUser.id, newUser.name, newUser.email);
-		const data = { newUser, token };
-		return data;
+		return token;
 	},
 	loginUser: async ({ input }) => {
-		console.log(input);
+		const { email, password } = input;
+		const findUser = await User.findOne({ where: { email: email } });
+		if (!findUser) {
+			throw new Error("Пользователь не найден");
+		}
+		const isMatch = await bcrypt.compare(
+			password.toString(),
+			findUser.password
+		);
+		if (!isMatch) {
+		}
+		const token = generateJwt(findUser.id, findUser.user, findUser.email);
+		console.log(findUser, "token is", token);
+		return { findUser, token };
 	},
 };
