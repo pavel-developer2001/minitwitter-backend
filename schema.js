@@ -20,12 +20,12 @@ export const schema = buildSchema(`
         email: String
         password: Int
     }
-   
+ 
     type Query{
         getAllUsers: [User]
     }
     type Mutation {
-        registerUser(input: UserRegisterInput): User, token:String
+        registerUser(input: UserRegisterInput):User, token: String
         loginUser(input: UserLoginInput): User
     }
 `);
