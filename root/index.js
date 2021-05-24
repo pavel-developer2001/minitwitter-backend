@@ -21,7 +21,7 @@ export const root = {
 		});
 		await newUser.save();
 		const token = generateJwt(newUser.id, newUser.name, newUser.email);
-		return newUser;
+		return { id: newUser.id, name: newUser.name, email: newUser.email, token };
 	},
 	loginUser: async ({ input }) => {
 		const { email, password } = input;

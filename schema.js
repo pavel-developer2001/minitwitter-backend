@@ -6,7 +6,8 @@ export const schema = buildSchema(`
         name: String
         email: String  
         password: String  
-        password2: String 
+        password2: String
+        token: String
     }
 
     input UserRegisterInput {
@@ -25,7 +26,7 @@ export const schema = buildSchema(`
         getAllUsers: [User]
     }
     type Mutation {
-        registerUser(input: UserRegisterInput):User, token: String
+        registerUser(input: UserRegisterInput):User
         loginUser(input: UserLoginInput): User
     }
 `);
