@@ -5,7 +5,6 @@ import { User } from "../models/user.js";
 export const root = {
 	registerUser: async ({ input }) => {
 		const { name, email, password, password2 } = input;
-		console.log(name, email, password, password2);
 		if (password !== password2) {
 			throw new Error("Пароли не совпадают");
 		}
@@ -35,8 +34,12 @@ export const root = {
 		);
 		if (!isMatch) {
 		}
-		const token = generateJwt(findUser.id, findUser.user, findUser.email);
-		console.log(findUser, "token is", token);
-		return { findUser, token };
+		const token = generateJwt(findUser.id, findUser.name, findUser.email);
+		return {
+			id: findUser.id,
+			name: findUser.name,
+			email: findUser.email,
+			token,
+		};
 	},
 };

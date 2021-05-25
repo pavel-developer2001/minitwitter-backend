@@ -6,7 +6,6 @@ export const schema = buildSchema(`
         name: String
         email: String  
         password: String  
-        password2: String
         token: String
     }
 
@@ -19,7 +18,7 @@ export const schema = buildSchema(`
     }
     input UserLoginInput {
         email: String
-        password: Int
+        password: String  
     }
  
     type Query{
