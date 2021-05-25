@@ -1,8 +1,31 @@
 import bcrypt from "bcrypt";
 import { generateJwt } from "../utils/generateJwt.js";
 import { User } from "../models/user.js";
+import { Tweet } from "../models/tweet.js";
 
 export const root = {
+	addTweet: async ({ input }) => {
+		const { author, tweetText, userId } = input;
+		console.log("AAAAAAAAAA", author, tweetText, userId);
+		if (tweetText == "") {
+			throw new Error("Напишите твит");
+		}
+		const newTweet = await Tweet.create({
+			author,
+			tweetText,
+			userId,
+		});
+		await newTweet.save();
+		return {
+			id: newTweet.id,
+			author: newTweet.author,
+			tweetText: newTweet.tweetText,
+		};
+	},
+	getAllTweets: async () => {
+		const tweets = await Tweet.findAll();
+		return tweets;
+	},
 	registerUser: async ({ input }) => {
 		const { name, email, password, password2 } = input;
 		if (password !== password2) {

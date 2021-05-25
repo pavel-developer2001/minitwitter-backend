@@ -1,5 +1,6 @@
 import { sequelize } from "../db.js";
 import Sequelize from "sequelize";
+import { Tweet } from "./tweet.js";
 
 export const User = sequelize.define("users", {
 	id: {
@@ -21,3 +22,5 @@ export const User = sequelize.define("users", {
 		allowNull: false,
 	},
 });
+User.hasMany(Tweet);
+Tweet.belongsTo(User);
